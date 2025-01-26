@@ -1,0 +1,166 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-image: url('/images/home-background.webp'), linear-gradient(to bottom, #f8f9fa, #e9ecef);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-container {
+            background-color: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .nav-card {
+            transform: scale(0.9); /* 10% reduction for better fit */
+            transform-origin: center;
+            margin: 0 auto; /* Center cards */
+        }
+
+        .nav-card i {
+            font-size: 2rem; /* Down from 2.5rem */
+        }
+
+        .nav-card h3 {
+            font-size: 1.25rem; /* Down from 1.5rem */
+            margin-bottom: 0.5rem;
+        }
+
+        .row {
+            margin: -1.5rem; /* Compensate for scaling */
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .nav-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #007bff;
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(3px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" href="/">Network Manager</a>
+                <form action="/Home/Logout" method="post" class="ml-auto">
+                    @Html.AntiForgeryToken()
+                    @if (User.Identity.IsAuthenticated)
+                        {
+                            <form asp-controller="Login" asp-action="Logout" method="post">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </button>
+                            </form>
+                        }
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content-container">
+        <main role="main" class="h-100">
+            <div class="d-flex flex-column h-100 justify-content-center"></div>
+            <h1 class="display-4 mb-4">Welcome, @User.Identity.Name</h1>
+            
+            <div class="row">
+                <!-- My Networks -->
+                <div class="col-md-4 mb-4">
+                    <a href="/Networks" class="card nav-card text-center p-4">
+                        <i class="fas fa-network-wired"></i>
+                        <h3>My Networks</h3>
+                    </a>
+                </div>
+
+                <!-- My Devices -->
+                <div class="col-md-4 mb-4">
+                    <a href="/Devices" class="card nav-card text-center p-4">
+                        <i class="fas fa-laptop"></i>
+                        <h3>My Devices</h3>
+                    </a>
+                </div>
+
+                <!-- My Buildings -->
+                <div class="col-md-4 mb-4">
+                    <a href="/Buildings" class="card nav-card text-center p-4">
+                        <i class="fas fa-building"></i>
+                        <h3>My Buildings</h3>
+                    </a>
+                </div>
+
+                <!-- My Locations -->
+                <div class="col-md-4 mb-4">
+                    <a href="/Locations" class="card nav-card text-center p-4">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>My Locations</h3>
+                    </a>
+                </div>
+
+                <!-- Add Device -->
+                <div class="col-md-4 mb-4">
+                    <a href="/AddDevice" class="card nav-card text-center p-4">
+                        <i class="fas fa-plus-circle"></i>
+                        <h3>Add Device</h3>
+                    </a>
+                </div>
+
+                <!-- Add User -->
+                <div class="col-md-4 mb-4">
+                    <a href="/AddUser" class="card nav-card text-center p-4">
+                        <i class="fas fa-user-plus"></i>
+                        <h3>Add User</h3>
+                    </a>
+                </div>
+
+                <!-- Set Permissions -->
+                <div class="col-md-4 mb-4">
+                    <a href="/Permissions" class="card nav-card text-center p-4">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Set Permissions</h3>
+                    </a>
+                </div>
+            </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted mt-auto">
+        <div class="container">
+            &copy; 2024 - Network Management System
+        </div>
+    </footer>
+</body>
+</html>

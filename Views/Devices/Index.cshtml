@@ -1,0 +1,199 @@
+@using IPAddressManagement.Models
+@model IEnumerable<IPAddressManagement.Models.Device>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Devices";
+}
+
+<div class="content-container">
+    <main role="main">
+        <h1 class="display-4 mb-4">Device Management</h1>
+        
+        <!-- Summary Cards and Search -->
+        <div class="row mb-4 align-items-center">
+            <!-- Summary Cards -->
+            <div class="col-md-8">
+                <div class="row g-2">
+                    <!-- All Card -->
+                    <div class="col-md-3">
+                        <a href="@Url.Action("Index", new { 
+                            statusFilter = "",
+                            searchString = ViewBag.SearchString,
+                            sortOrder = ViewBag.CurrentSort
+                        })" class="text-decoration-none">
+                            <div class="card text-white bg-secondary @(string.IsNullOrEmpty(ViewBag.StatusFilter) ? "active" : "")" style="height: 38px;">
+                                <div class="card-body d-flex align-items-center p-2">
+                                    <h5 class="card-title mb-0">All: @ViewBag.TotalDevices</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Active Card -->
+                    <div class="col-md-3">
+                        <a href="@Url.Action("Index", new { 
+                            statusFilter = "Active",
+                            searchString = ViewBag.SearchString,
+                            sortOrder = ViewBag.CurrentSort
+                        })" class="text-decoration-none">
+                            <div class="card text-white bg-success @(ViewBag.StatusFilter == "Active" ? "active" : "")" style="height: 38px;">
+                                <div class="card-body d-flex align-items-center p-2">
+                                    <h5 class="card-title mb-0">Active: @ViewBag.ActiveCount</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Inactive Card -->
+                    <div class="col-md-3">
+                        <a href="@Url.Action("Index", new { 
+                            statusFilter = "Inactive",
+                            searchString = ViewBag.SearchString,
+                            sortOrder = ViewBag.CurrentSort
+                        })" class="text-decoration-none">
+                            <div class="card text-white bg-danger @(ViewBag.StatusFilter == "Inactive" ? "active" : "")" style="height: 38px;">
+                                <div class="card-body d-flex align-items-center p-2">
+                                    <h5 class="card-title mb-0">Inactive: @ViewBag.InactiveCount</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Maintenance Card -->
+                    <div class="col-md-3">
+                        <a href="@Url.Action("Index", new { 
+                            statusFilter = "Maintenance",
+                            searchString = ViewBag.SearchString,
+                            sortOrder = ViewBag.CurrentSort
+                        })" class="text-decoration-none">
+                            <div class="card text-white bg-warning @(ViewBag.StatusFilter == "Maintenance" ? "active" : "")" style="height: 38px;">
+                                <div class="card-body d-flex align-items-center p-2">
+                                    <h5 class="card-title mb-0">Maintenance: @ViewBag.MaintenanceCount</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Box -->
+            <div class="col-md-4">
+                <form method="get" action="@Url.Action("Index")">
+                    <div class="input-group" style="height: 38px;">
+                        <input type="text" 
+                               name="searchString" 
+                               class="form-control" 
+                               placeholder="Search devices..."
+                               value="@ViewBag.SearchString">
+                        <input type="hidden" name="statusFilter" value="@ViewBag.StatusFilter">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Device Table -->
+        <div class="card mb-4">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>
+                                    <a href="@Url.Action("Index", new { 
+                                        sortOrder = ViewBag.HostnameSort,
+                                        searchString = ViewBag.SearchString,
+                                        statusFilter = ViewBag.StatusFilter
+                                    })">
+                                        Hostname 
+                                        <i class="fas fa-sort@(ViewBag.HostnameSort.Contains("desc") ? "-down" : "-up")"></i>
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="@Url.Action("Index", new { 
+                                        sortOrder = ViewBag.IPSort,
+                                        searchString = ViewBag.SearchString,
+                                        statusFilter = ViewBag.StatusFilter
+                                    })">
+                                        IP Address
+                                        <i class="fas fa-sort@(ViewBag.IPSort.Contains("desc") ? "-down" : "-up")"></i>
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="@Url.Action("Index", new { 
+                                        sortOrder = ViewBag.StatusSort,
+                                        searchString = ViewBag.SearchString,
+                                        statusFilter = ViewBag.StatusFilter
+                                    })">
+                                        Status
+                                        <i class="fas fa-sort@(ViewBag.StatusSort.Contains("desc") ? "-down" : "-up")"></i>
+                                    </a>
+                                </th>
+                                <th>Location</th>
+                                <th>Last Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var device in Model)
+                            {
+                                <tr>
+                                    <td>@device.Hostname</td>
+                                    <td>@device.IPAddress</td>
+                                    <td>
+                                        <span class="status-dot @device.Status.ToString().ToLower()"></span>
+                                        @device.Status
+                                    </td>
+                                    <td>@device.Building, @device.City</td>
+                                    <td>@device.UpdatedAt.ToString("g")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        @if (ViewBag.TotalPages > 1)
+        {
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                            <a class="page-link" 
+                               href="@Url.Action("Index", new { 
+                                   page = i,
+                                   sortOrder = ViewBag.CurrentSort,
+                                   searchString = ViewBag.SearchString,
+                                   statusFilter = ViewBag.StatusFilter
+                               })">@i</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        }
+    </main>
+</div>
+
+<style>
+    .status-dot {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 8px;
+    }
+    .status-dot.active { background-color: #28a745; }
+    .status-dot.inactive { background-color: #dc3545; }
+    .status-dot.maintenance { background-color: #ffc107; }
+    .table-hover tbody tr:hover { background-color: #f8f9fa; }
+    .card.active { border: 2px solid rgba(0, 0, 0, 0.5); }
+    .card-body { padding: 0.5rem; }
+    .input-group { height: 38px; }
+    .form-control { height: 100%; }
+    .btn-primary { height: 100%; }
+</style>
