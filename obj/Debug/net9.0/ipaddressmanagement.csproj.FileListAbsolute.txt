@@ -519,3 +519,4 @@ C:\Users\tomis\source\repos\ipaddressmanagement\obj\Debug\net9.0\refint\ipaddres
 C:\Users\tomis\source\repos\ipaddressmanagement\obj\Debug\net9.0\ipaddressmanagement.pdb
 C:\Users\tomis\source\repos\ipaddressmanagement\obj\Debug\net9.0\ipaddressmanagement.genruntimeconfig.cache
 C:\Users\tomis\source\repos\ipaddressmanagement\obj\Debug\net9.0\ref\ipaddressmanagement.dll
+C:\Users\tomis\source\repos\ipaddressmanagement\obj\Debug\net9.0\ipaddressmanagement.sourcelink.json

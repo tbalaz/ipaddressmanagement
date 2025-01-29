@@ -63,8 +63,9 @@
                     <div class="form-group mb-3">
                         <label asp-for="MACAddress" class="form-label">MAC Address</label>
                         <input asp-for="MACAddress" class="form-control" />
-                        <span asp-validation-for="MACAddress" class="text-danger"></span>
+                        <span id="MACAddress-error" asp-validation-for="MACAddress" class="text-danger"></span>
                     </div>
+
                 </div>
             </div>
 

@@ -1,33 +1,37 @@
+@model IPAddressManagement.Models.Building
+
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "Buildings"; <!-- Change per page -->
+    ViewData["Title"] = "Add Device";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Same head section as home page -->
-</head>
-<body>
-    <style>
-        body {
-            background-image: url('/images/home-background.webp'), linear-gradient(to bottom, #f8f9fa, #e9ecef);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: 100vh;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
-    <!-- Same header -->
-    <div class="content-container">
-        <main role="main">
-            <h1 class="display-4 mb-4">@ViewData["Title"]</h1>
-            <!-- Page-specific content here -->
-        </main>
+<h1>Create Building</h1>
+
+<form asp-action="Index" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-    <!-- Same footer -->
-</body>
-</html>
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NumberOfFloors"></label>
+        <input asp-for="NumberOfFloors" class="form-control" />
+        <span asp-validation-for="NumberOfFloors" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NumberOfRooms"></label>
+        <input asp-for="NumberOfRooms" class="form-control" />
+        <span asp-validation-for="NumberOfRooms" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ShortName">Short Name</label>
+        <input asp-for="ShortName" class="form-control" />
+        <span asp-validation-for="ShortName" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

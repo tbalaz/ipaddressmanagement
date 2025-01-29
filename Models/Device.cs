@@ -30,7 +30,7 @@ namespace IPAddressManagement.Models
         public DeviceStatus Status { get; set; }
 
         [Required(ErrorMessage = "Hostname is required.")]
-        [RegularExpression(@"^[A-Za-z-]+$", ErrorMessage = "Hostname cannot contain numbers.")]
+        [RegularExpression(@"^[a-zA-Z]{0,2}$", ErrorMessage = "Hostname cannot contain numbers.")]
         public string Hostname { get; set; }
 
         [Required(ErrorMessage = "Department is required")]

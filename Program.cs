@@ -2,11 +2,22 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using IPAddressManagement.Data;
 using Microsoft.Extensions.Options;
+using System.Web;
 
 var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration.GetSection("HtmlHelperOptions");
+var clientValidationEnabled = config.GetValue<bool>("ClientValidationEnabled");
+var unobtrusiveJavaScriptEnabled = config.GetValue<bool>("UnobtrusiveJavaScriptEnabled");
+
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddRazorRuntimeCompilation()
+    .AddViewOptions(options =>
+    {
+        options.HtmlHelperOptions.ClientValidationEnabled = true;
+        options.HtmlHelperOptions.UnobtrusiveJavaScriptEnabled = true; 
+    });
 
 // Add DbContext
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -37,6 +48,12 @@ builder.Services.AddSession();
 
 var app = builder.Build();
 
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("Content-Security-Policy", "script-src 'self' 'unsafe-inline' 'unsafe-eval';");
+    await next();
+});
+
 // Migrate and seed the database
 using (var scope = app.Services.CreateScope())
 {
@@ -63,7 +80,7 @@ using (var scope = app.Services.CreateScope())
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
+    //app.UseHsts();
 }
 
 app.UseHttpsRedirection();
