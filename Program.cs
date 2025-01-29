@@ -6,8 +6,8 @@ using System.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration.GetSection("HtmlHelperOptions");
-var clientValidationEnabled = config.GetValue<bool>("ClientValidationEnabled");
-var unobtrusiveJavaScriptEnabled = config.GetValue<bool>("UnobtrusiveJavaScriptEnabled");
+//var clientValidationEnabled = config.GetValue<bool>("ClientValidationEnabled");
+//var unobtrusiveJavaScriptEnabled = config.GetValue<bool>("UnobtrusiveJavaScriptEnabled");
 
 
 // Add services to the container.
@@ -16,7 +16,6 @@ builder.Services.AddControllersWithViews()
     .AddViewOptions(options =>
     {
         options.HtmlHelperOptions.ClientValidationEnabled = true;
-        options.HtmlHelperOptions.UnobtrusiveJavaScriptEnabled = true; 
     });
 
 // Add DbContext

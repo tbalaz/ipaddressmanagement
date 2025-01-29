@@ -1,6 +1,6 @@
 @using IPAddressManagement
 @using IPAddressManagement.Models
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -159,7 +159,33 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+    // As soon as the DOM is ready
+    $(document).ready(function () {
+
+        // Remove any existing initialization (in case unobtrusive is already set up)
+        $("form").removeData("validator").removeData("unobtrusiveValidation");
+
+        // Re-parse the form(s) to attach validators again
+        $.validator.unobtrusive.parse("form");
+
+        // Now override the onkeyup event
+        $.validator.setDefaults({
+            onkeyup: function (element, event) {
+                // The default only validates after the field has been "visited."
+                // If you want to always validate as you type:
+                if (event.which === 9 && this.elementValue(element) === "") {
+                    // If it's a tab and the field is empty, skip
+                    return;
+                } else {
+                    // Otherwise, validate on every keyup
+                    this.element(element);
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>

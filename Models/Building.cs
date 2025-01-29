@@ -20,7 +20,7 @@ namespace IPAddressManagement.Models
         public int NumberOfRooms { get; set; }
 
         [Required(ErrorMessage = "Short Name is required.")]
-        [StringLength(2, ErrorMessage = "Short Name cannot exceed 10 characters.")]
+        [StringLength(2, ErrorMessage = "Short Name cannot exceed 2 characters.")]
         public string ShortName { get; set; }
     }
 }

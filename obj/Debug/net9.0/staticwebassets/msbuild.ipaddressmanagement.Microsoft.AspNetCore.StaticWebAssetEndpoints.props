@@ -52,13 +52,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ipaddressmanagement.7l3yim0540.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"7l3yim0540"},{"Name":"integrity","Value":"sha256-q/DK3QT1EUw9nymitddWBNxNBT4iTE\u002BTa\u002B0IqR0jLQ4="},{"Name":"label","Value":"_content/ipaddressmanagement/ipaddressmanagement.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1137"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022q/DK3QT1EUw9nymitddWBNxNBT4iTE\u002BTa\u002B0IqR0jLQ4=\u0022"},{"Name":"Last-Modified","Value":"Thu, 23 Jan 2025 09:47:10 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1137"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022q/DK3QT1EUw9nymitddWBNxNBT4iTE\u002BTa\u002B0IqR0jLQ4=\u0022"},{"Name":"Last-Modified","Value":"Wed, 29 Jan 2025 19:08:26 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/ipaddressmanagement/ipaddressmanagement.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ipaddressmanagement.7l3yim0540.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-q/DK3QT1EUw9nymitddWBNxNBT4iTE\u002BTa\u002B0IqR0jLQ4="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1137"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022q/DK3QT1EUw9nymitddWBNxNBT4iTE\u002BTa\u002B0IqR0jLQ4=\u0022"},{"Name":"Last-Modified","Value":"Thu, 23 Jan 2025 09:47:10 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1137"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022q/DK3QT1EUw9nymitddWBNxNBT4iTE\u002BTa\u002B0IqR0jLQ4=\u0022"},{"Name":"Last-Modified","Value":"Wed, 29 Jan 2025 19:08:26 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/ipaddressmanagement/js/site.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>
