@@ -8,8 +8,11 @@ namespace IPAddressManagement.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Device> Devices { get; set; }
         public DbSet<ChangeLog> ChangeLogs { get; set; }
+        public DbSet<Building> Buildings { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
         {
         }
 
@@ -28,24 +31,67 @@ namespace IPAddressManagement.Data
             // Configure ChangeLog
             modelBuilder.Entity<ChangeLog>()
                 .HasKey(cl => cl.LogID);
-            
-            // Configure relationships
             modelBuilder.Entity<ChangeLog>()
                 .HasOne(cl => cl.Device)
                 .WithMany(d => d.ChangeLogs)
                 .HasForeignKey(cl => cl.DeviceID);
 
-            // Seed initial data
+            // Configure AuditLog (optional)
+            modelBuilder.Entity<AuditLog>(entity =>
+            {
+                entity.ToTable("AuditLogs");
+                entity.Property(a => a.EntityType).HasMaxLength(100);
+            });
+
+            // One-to-many: Building -> Devices
+            modelBuilder.Entity<Building>()
+                .HasMany(b => b.Devices)
+                .WithOne(d => d.Building)
+                .HasForeignKey(d => d.BuildingId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Unique index on Name + StreetName + StreetNumber
+            modelBuilder.Entity<Building>()
+                .HasIndex(b => new { b.Name, b.StreetName, b.StreetNumber })
+                .IsUnique();
+
+            // ----------------- SEED DATA -----------------
+
+            // 1) Seed a user
             modelBuilder.Entity<User>().HasData(
                 new User
                 {
                     Id = 1,
                     Username = "admin",
-                    PasswordHash = "$2a$11$p7WzGeSVIdVRSSpwvxxw7OC3C3K9j2WYCx1DAA0JIJAwnLn4aDwSe"
+                    PasswordHash = "$2a$11$p7WzGeSVIdVRSSpwvxxw7OC3C3K9j2WYCx1DAA0JIJAwnLn4aDwSe",
+                    CreatedAt = new DateTime(2023, 1, 1),
+                    UpdatedAt = new DateTime(2023, 1, 1),
+                    CreatedBy = "SeedData",
+                    UpdatedBy = "SeedData"
                 }
             );
 
-            // Seed sample device
+            // 2) Seed a Building with Id = 1
+            modelBuilder.Entity<Building>().HasData(
+                new Building
+                {
+                    Id = 1,
+                    Name = "Eurostation",
+                    CityName = "Brussels",
+                    StreetName = "Rue de la Loi",
+                    StreetNumber = "12A", // for example
+                    LowestFloor = 5,
+                    HighestFloor = 20,
+                    NumberOfRooms = 50,
+                    ShortName = "ES",
+                    CreatedAt = new DateTime(2023, 1, 1),
+                    CreatedBy = "SeedData",
+                    UpdatedAt = new DateTime(2023, 1, 1),
+                    UpdatedBy = "SeedData"
+                }
+            );
+
+            // 3) Seed a Device that references BuildingId = 1
             modelBuilder.Entity<Device>().HasData(
                 new Device
                 {
@@ -57,14 +103,13 @@ namespace IPAddressManagement.Data
                     EquipmentType = "Dell PowerEdge R750",
                     Criticality = CriticalityLevel.High,
                     MACAddress = "00:1A:2B:3C:4D:5E",
-                    City = "Brussels",
-                    PostalCode = "1000",
-                    Street = "Rue de la Loi",
-                    Building = "Eurostation",
+                    BuildingId = 1,
                     Floor = 5,
                     Room = "SR501",
                     CreatedAt = new DateTime(2023, 1, 1),
-                    UpdatedAt = new DateTime(2023, 1, 1) 
+                    UpdatedAt = new DateTime(2023, 1, 1),
+                    CreatedBy = "SeedData",
+                    UpdatedBy = "SeedData"
                 }
             );
         }

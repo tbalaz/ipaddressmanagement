@@ -26,6 +26,6 @@ public class HomeController : Controller
             //HttpContext.Session.Clear();
             return RedirectToAction("Index", "Login");
             //_logger.LogInformation("User logged out. Redirecting to login page.");
-return RedirectToAction("Index", "Login");
+//return RedirectToAction("Index", "Login");
         }
 }

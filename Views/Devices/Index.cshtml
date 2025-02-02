@@ -9,7 +9,12 @@
 <div class="content-container">
     <main role="main">
         <h1 class="display-4 mb-4">Device Management</h1>
-        
+
+        <!-- Possibly add a button to create a new device -->
+        <div class="mb-3">
+            <a asp-action="Index" asp-controller="AddDevice" class="btn btn-primary">Add New Device</a>
+        </div>
+
         <!-- Summary Cards and Search -->
         <div class="row mb-4 align-items-center">
             <!-- Summary Cards -->
@@ -146,8 +151,13 @@
                                         <span class="status-dot @device.Status.ToString().ToLower()"></span>
                                         @device.Status
                                     </td>
-                                    <td>@device.Building, @device.City</td>
-                                    <td>@device.UpdatedAt.ToString("g")</td>
+                                    <td>
+                                        <!-- Replace the old 'device.Building' string with the related entity's name -->
+                                        @device.Building?.CityName,  (Floor: @device.Floor)
+                                    </td>
+                                    <td>
+                                        @(device.UpdatedAt.HasValue ? device.UpdatedAt.Value.ToString("g") : "N/A")
+                                    </td>
                                 </tr>
                             }
                         </tbody>
