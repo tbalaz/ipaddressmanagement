@@ -58,6 +58,9 @@ namespace IPAddressManagement.Models
         [StringLength(2, ErrorMessage = "Short Name cannot exceed 2 characters.")]
         public string ShortName { get; set; }
 
+        [Required(ErrorMessage = "Branch or HQ is required.")]
+        public string OrganizationalUnit { get; set; }
+
         [BindNever]
         [ValidateNever]
         public ICollection<Device> Devices { get; set; } = new List<Device>();

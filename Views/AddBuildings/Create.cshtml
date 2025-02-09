@@ -13,56 +13,62 @@
         <div class="card-body">
             <form asp-action="Create" method="post">
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label asp-for="Name" class="font-weight-bold"></label>
+                    <div class="form-group col-md-4">
+                        <label asp-for="Name" class="font-weight-bold">Building Name</label>
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label asp-for="CityName" class="font-weight-bold"></label>
+                        <label asp-for="CityName" class="font-weight-bold">City Name</label>
                         <input asp-for="CityName" class="form-control" />
                         <span asp-validation-for="CityName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label asp-for="OrganizationalUnit" class="font-weight-bold">Organizational Unit</label>
+                        <input asp-for="OrganizationalUnit" class="form-control" />
+                        <span asp-validation-for="OrganizationalUnit" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label asp-for="StreetName" class="font-weight-bold"></label>
+                        <label asp-for="StreetName" class="font-weight-bold">Street Name</label>
                         <input asp-for="StreetName" class="form-control" />
                         <span asp-validation-for="StreetName" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group col-md-6">
-                        <label asp-for="StreetNumber" class="font-weight-bold"></label>
+                    <div class="form-group col-md-2">
+                        <label asp-for="StreetNumber" class="font-weight-bold">Street Number</label>
                         <input asp-for="StreetNumber" class="form-control" />
                         <span asp-validation-for="StreetNumber" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label asp-for="LowestFloor" class="font-weight-bold"></label>
+                    <div class="form-group col-md-4">
+                        <label asp-for="LowestFloor" class="font-weight-bold">Lowest Floor</label>
                         <input asp-for="LowestFloor" class="form-control" />
                         <span asp-validation-for="LowestFloor" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group col-md-6">
-                        <label asp-for="HighestFloor" class="font-weight-bold"></label>
+                    <div class="form-group col-md-4">
+                        <label asp-for="HighestFloor" class="font-weight-bold">Highest Floor</label>
                         <input asp-for="HighestFloor" class="form-control" />
                         <span asp-validation-for="HighestFloor" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label asp-for="NumberOfRooms" class="font-weight-bold">Number Of Rooms</label>
+                        <input asp-for="NumberOfRooms" class="form-control" />
+                        <span asp-validation-for="NumberOfRooms" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label asp-for="NumberOfRooms" class="font-weight-bold"></label>
-                        <input asp-for="NumberOfRooms" class="form-control" />
-                        <span asp-validation-for="NumberOfRooms" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label asp-for="ShortName" class="font-weight-bold"></label>
+                        <label asp-for="ShortName" class="font-weight-bold">Building Short Name</label>
                         <input asp-for="ShortName" class="form-control" />
                         <span asp-validation-for="ShortName" class="text-danger"></span>
                     </div>

@@ -1,0 +1,101 @@
+@model IPAddressManagement.Models.Device
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Edit Device";
+}
+
+<div class="content-container">
+    <main role="main">
+        <h1 class="display-4 mb-4">Edit Device</h1>
+
+        <form asp-action="Edit" method="post" class="needs-validation" novalidate>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Hostname" class="form-label"></label>
+                    <input asp-for="Hostname" class="form-control" readonly />
+                    <span asp-validation-for="Hostname" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="IPAddress" class="form-label"></label>
+                    <input asp-for="IPAddress" class="form-control" readonly />
+                    <span asp-validation-for="IPAddress" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Status" class="form-label"></label>
+                    <select asp-for="Status" class="form-control" disabled>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                        <option value="Maintenance">Maintenance</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Department" class="form-label"></label>
+                    <input asp-for="Department" class="form-control" readonly />
+                    <span asp-validation-for="Department" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="EquipmentType" class="form-label"></label>
+                    <input asp-for="EquipmentType" class="form-control" readonly />
+                    <span asp-validation-for="EquipmentType" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Criticality" class="form-label"></label>
+                    <select asp-for="Criticality" class="form-control" disabled>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                    <span asp-validation-for="Criticality" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="MACAddress" class="form-label"></label>
+                    <input asp-for="MACAddress" class="form-control" readonly />
+                    <span asp-validation-for="MACAddress" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="BuildingId" class="form-label">Building</label>
+                    <select asp-for="BuildingId" asp-items="ViewBag.Buildings" class="form-control" disabled></select>
+                    <span asp-validation-for="BuildingId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Floor" class="form-label"></label>
+                    <input asp-for="Floor" type="number" class="form-control" min="-10" max="40" readonly />
+                    <span asp-validation-for="Floor" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Room" class="form-label"></label>
+                    <input asp-for="Room" class="form-control" readonly />
+                    <span asp-validation-for="Room" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" disabled id="saveButton" />
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                <button type="button" class="btn btn-warning" id="editButton">Edit</button>
+            </div>
+        </form>
+    </main>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById("editButton").addEventListener("click", function() {
+            var inputs = document.querySelectorAll("input, select");
+            inputs.forEach(function(input) {
+                input.removeAttribute("readonly");
+                input.removeAttribute("disabled");
+            });
+            document.getElementById("saveButton").removeAttribute("disabled");
+        });
+    </script>
+}

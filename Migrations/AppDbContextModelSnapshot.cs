@@ -83,6 +83,10 @@ namespace ipaddressmanagement.Migrations
                     b.Property<int>("NumberOfRooms")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("OrganizationalUnit")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ShortName")
                         .IsRequired()
                         .HasMaxLength(2)
@@ -122,6 +126,7 @@ namespace ipaddressmanagement.Migrations
                             LowestFloor = 5,
                             Name = "Eurostation",
                             NumberOfRooms = 50,
+                            OrganizationalUnit = "HQ",
                             ShortName = "ES",
                             StreetName = "Rue de la Loi",
                             StreetNumber = "12A",

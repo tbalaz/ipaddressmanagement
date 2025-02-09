@@ -78,6 +78,7 @@ namespace IPAddressManagement.Data
                     Id = 1,
                     Name = "Eurostation",
                     CityName = "Brussels",
+                    OrganizationalUnit = "HQ",
                     StreetName = "Rue de la Loi",
                     StreetNumber = "12A", // for example
                     LowestFloor = 5,

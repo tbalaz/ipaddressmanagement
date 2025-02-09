@@ -4,6 +4,8 @@ using IPAddressManagement.Data;
 using IPAddressManagement.Models;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 [Authorize]
 public class BuildingsController : Controller
@@ -17,14 +19,34 @@ public class BuildingsController : Controller
 
     // GET: /Buildings
     [HttpGet]
-    public IActionResult Index(string searchString, string sortOrder, int page = 1)
+    public IActionResult Index(string searchString, string sortOrder, int page = 1, string city = null, string street = null, string shortName = null, string organizationalUnit = null)
     {
         // Retrieve buildings from the database
         var query = _context.Buildings.AsQueryable();
 
+         if (!string.IsNullOrEmpty(city))
+        {
+            query = query.Where(b => b.CityName.ToLower().Contains(city.ToLower()));
+        }
+
+        if (!string.IsNullOrEmpty(street))
+        {
+            query = query.Where(b => b.StreetName.ToLower().Contains(street.ToLower()));
+        }
+
+        if (!string.IsNullOrEmpty(shortName))
+        {
+            query = query.Where(b => b.ShortName.ToLower().Contains(shortName.ToLower()));
+        }
+
+        if (!string.IsNullOrEmpty(organizationalUnit))
+        {
+            query = query.Where(b => b.OrganizationalUnit.ToLower().Contains(organizationalUnit.ToLower()));
+        }
+
         if (!string.IsNullOrEmpty(searchString))
         {
-            query = query.Where(b => b.Name.Contains(searchString) || b.FullAddress.Contains(searchString));
+            query = query.Where(b => b.Name.ToLower().Contains(searchString.ToLower()) || b.FullAddress.ToLower().Contains(searchString.ToLower()));
         }
 
         // Default sort by Name; you can add additional sorting if needed.
@@ -38,6 +60,10 @@ public class BuildingsController : Controller
         ViewBag.TotalPages = (int)Math.Ceiling(totalBuildings / (double)pageSize);
         ViewBag.SearchString = searchString;
         ViewBag.CurrentSort = sortOrder;
+        ViewBag.SelectedCity = city;
+        ViewBag.SelectedStreet = street;
+        ViewBag.SelectedShortName = shortName;
+        ViewBag.SelectedOrganizationalUnit = organizationalUnit;
 
         var buildings = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
@@ -99,5 +125,58 @@ public class BuildingsController : Controller
         return RedirectToAction("Index");
     }
 
-    // Additional actions (Edit, Delete) can be added here if needed.
+    // GET: /Buildings/Edit/5
+    [HttpGet]
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var building = await _context.Buildings.FindAsync(id);
+        if (building == null)
+        {
+            return NotFound();
+        }
+        return View(building);
+    }
+
+    // POST: /Buildings/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CityName,StreetName,StreetNumber,LowestFloor,HighestFloor,NumberOfRooms,ShortName,OrganizationalUnit")] Building building)
+    {
+        if (id != building.Id)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                _context.Update(building);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!BuildingExists(building.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        return View(building);
+    }
+
+    private bool BuildingExists(int id)
+    {
+        return _context.Buildings.Any(e => e.Id == id);
+    }
 }

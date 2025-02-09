@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tomis\\source\\repos\\ipaddressmanagement\\ipaddressmanagement.csproj": {}
+    "c:\\Users\\tomis\\source\\repos\\ipaddressmanagement\\ipaddressmanagement.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tomis\\source\\repos\\ipaddressmanagement\\ipaddressmanagement.csproj": {
+    "c:\\Users\\tomis\\source\\repos\\ipaddressmanagement\\ipaddressmanagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tomis\\source\\repos\\ipaddressmanagement\\ipaddressmanagement.csproj",
+        "projectUniqueName": "c:\\Users\\tomis\\source\\repos\\ipaddressmanagement\\ipaddressmanagement.csproj",
         "projectName": "ipaddressmanagement",
-        "projectPath": "C:\\Users\\tomis\\source\\repos\\ipaddressmanagement\\ipaddressmanagement.csproj",
+        "projectPath": "c:\\Users\\tomis\\source\\repos\\ipaddressmanagement\\ipaddressmanagement.csproj",
         "packagesPath": "C:\\Users\\tomis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tomis\\source\\repos\\ipaddressmanagement\\obj\\",
+        "outputPath": "c:\\Users\\tomis\\source\\repos\\ipaddressmanagement\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

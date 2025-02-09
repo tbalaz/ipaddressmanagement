@@ -1,5 +1,5 @@
 @using IPAddressManagement.Models
-@model IEnumerable<IPAddressManagement.Models.Building>
+@model IEnumerable<Building>
 
 @{
     Layout = "_Layout";
@@ -10,44 +10,33 @@
     <main role="main">
         <h1 class="display-4 mb-4">Buildings Management</h1>
 
+        <form method="get" action="@Url.Action("Index")" class="mb-4">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="city">City</label>
+                    <input type="text" name="city" class="form-control" value="@ViewBag.SelectedCity" placeholder="City">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="street">Street</label>
+                    <input type="text" name="street" class="form-control" value="@ViewBag.SelectedStreet" placeholder="Street">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="shortName">Short Name</label>
+                    <input type="text" name="shortName" class="form-control" value="@ViewBag.SelectedShortName" placeholder="Short Name">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="organizationalUnit">Organizational Unit</label>
+                    <input type="text" name="organizationalUnit" class="form-control" value="@ViewBag.SelectedOrganizationalUnit" placeholder="Organizational Unit">
+                </div>
+                <div class="form-group col-md-2 align-self-end">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </form>
+
         <!-- Add New Building Button -->
         <div class="mb-3">
             <a asp-action="Create" asp-controller="AddBuildings" class="btn btn-primary">Add New Building</a>
-        </div>
-
-        <!-- Summary Cards and Search (Optional) -->
-        <div class="row mb-4 align-items-center">
-            <div class="col-md-8">
-                <div class="row g-2">
-                    <!-- All Buildings Card -->
-                    <div class="col-md-4">
-                        <a href="@Url.Action("Index", new { searchString = ViewBag.SearchString, sortOrder = ViewBag.CurrentSort })" class="text-decoration-none">
-                            <div class="card text-white bg-secondary" style="height: 38px;">
-                                <div class="card-body d-flex align-items-center p-2">
-                                    <h5 class="card-title mb-0">All: @ViewBag.TotalBuildings</h5>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- You can add more summary cards if desired -->
-                </div>
-            </div>
-
-            <!-- Search Box -->
-            <div class="col-md-4">
-                <form method="get" action="@Url.Action("Index")">
-                    <div class="input-group" style="height: 38px;">
-                        <input type="text" 
-                               name="searchString" 
-                               class="form-control" 
-                               placeholder="Search buildings..."
-                               value="@ViewBag.SearchString">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
         </div>
 
         <!-- Buildings Table -->
@@ -57,6 +46,7 @@
                     <table class="table table-hover mb-0">
                         <thead class="thead-light">
                             <tr>
+                                <th>City</th>
                                 <th>Name</th>
                                 <th>Address</th>
                                 <th>Floors</th>
@@ -66,9 +56,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(var building in Model)
+                            @foreach (var building in Model)
                             {
-                                <tr>
+                                <tr class="clickable-row" data-href="@Url.Action("Edit", new { id = building.Id })">
+                                    <td>@building.CityName</td>
                                     <td>@building.Name</td>
                                     <td>@building.FullAddress</td>
                                     <td>@building.FloorRange</td>
@@ -84,14 +75,14 @@
         </div>
 
         <!-- Pagination (Optional) -->
-        @if(ViewBag.TotalPages > 1)
+        @if (ViewBag.TotalPages > 1)
         {
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center">
                     @for (int i = 1; i <= ViewBag.TotalPages; i++)
                     {
                         <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                            <a class="page-link" href="@Url.Action("Index", new { page = i, sortOrder = ViewBag.CurrentSort, searchString = ViewBag.SearchString })">@i</a>
+                            <a class="page-link" href="@Url.Action("Index", new { page = i, sortOrder = ViewBag.CurrentSort, searchString = ViewBag.SearchString, city = ViewBag.SelectedCity, street = ViewBag.SelectedStreet, shortName = ViewBag.SelectedShortName, organizationalUnit = ViewBag.SelectedOrganizationalUnit })">@i</a>
                         </li>
                     }
                 </ul>
@@ -100,10 +91,19 @@
     </main>
 </div>
 
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var rows = document.querySelectorAll(".clickable-row");
+            rows.forEach(function(row) {
+                row.addEventListener("click", function() {
+                    window.location = row.dataset.href;
+                });
+            });
+        });
+    </script>
+}
+
 <style>
-    .table-hover tbody tr:hover { background-color: #f8f9fa; }
-    .card-body { padding: 0.5rem; }
-    .input-group { height: 38px; }
-    .form-control { height: 100%; }
-    .btn-primary { height: 100%; }
+    .clickable-row { cursor: pointer; }
 </style>

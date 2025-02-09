@@ -1,0 +1,19 @@
+@model IEnumerable<string>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Locations";
+}
+
+<div class="content-container">
+    <main role="main">
+        <h1 class="display-4 mb-4">Available Cities</h1>
+
+        <div class="list-group">
+            @foreach (var city in Model)
+            {
+                <a href="@Url.Action("Index", "Buildings", new { city = city })" class="list-group-item list-group-item-action">@city</a>
+            }
+        </div>
+    </main>
+</div>

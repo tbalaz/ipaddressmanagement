@@ -1,0 +1,88 @@
+@model IPAddressManagement.Models.Building
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Edit Building";
+}
+
+<div class="content-container">
+    <main role="main">
+        <h1 class="display-4 mb-4">Edit Building</h1>
+
+        <form asp-action="Edit" method="post" class="needs-validation" novalidate>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" readonly />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="CityName" class="form-label"></label>
+                    <input asp-for="CityName" class="form-control" readonly />
+                    <span asp-validation-for="CityName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="StreetName" class="form-label"></label>
+                    <input asp-for="StreetName" class="form-control" readonly />
+                    <span asp-validation-for="StreetName" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="StreetNumber" class="form-label"></label>
+                    <input asp-for="StreetNumber" class="form-control" readonly />
+                    <span asp-validation-for="StreetNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="LowestFloor" class="form-label"></label>
+                    <input asp-for="LowestFloor" class="form-control" readonly />
+                    <span asp-validation-for="LowestFloor" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="HighestFloor" class="form-label"></label>
+                    <input asp-for="HighestFloor" class="form-control" readonly />
+                    <span asp-validation-for="HighestFloor" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="NumberOfRooms" class="form-label"></label>
+                    <input asp-for="NumberOfRooms" class="form-control" readonly />
+                    <span asp-validation-for="NumberOfRooms" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ShortName" class="form-label"></label>
+                    <input asp-for="ShortName" class="form-control" readonly />
+                    <span asp-validation-for="ShortName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="OrganizationalUnit" class="form-label"></label>
+                    <input asp-for="OrganizationalUnit" class="form-control" readonly />
+                    <span asp-validation-for="OrganizationalUnit" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" disabled id="saveButton" />
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                <button type="button" class="btn btn-warning" id="editButton">Edit</button>
+            </div>
+        </form>
+    </main>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById("editButton").addEventListener("click", function() {
+            var inputs = document.querySelectorAll("input, select");
+            inputs.forEach(function(input) {
+                input.removeAttribute("readonly");
+                input.removeAttribute("disabled");
+            });
+            document.getElementById("saveButton").removeAttribute("disabled");
+        });
+    </script>
+}

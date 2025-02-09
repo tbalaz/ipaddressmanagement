@@ -12,7 +12,7 @@
 
         <!-- Possibly add a button to create a new device -->
         <div class="mb-3">
-            <a asp-action="Index" asp-controller="AddDevice" class="btn btn-primary">Add New Device</a>
+            <a asp-action="Create" asp-controller="AddDevice" class="btn btn-primary">Add New Device</a>
         </div>
 
         <!-- Summary Cards and Search -->
@@ -139,12 +139,13 @@
                                 </th>
                                 <th>Location</th>
                                 <th>Last Updated</th>
+                                <th>Updated by</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var device in Model)
                             {
-                                <tr>
+                                <tr class="clickable-row" data-href="@Url.Action("Edit", new { id = device.DeviceID })">
                                     <td>@device.Hostname</td>
                                     <td>@device.IPAddress</td>
                                     <td>
@@ -152,11 +153,13 @@
                                         @device.Status
                                     </td>
                                     <td>
-                                        <!-- Replace the old 'device.Building' string with the related entity's name -->
-                                        @device.Building?.CityName,  (Floor: @device.Floor)
+                                        @device.Building?.CityName, @device.Building?.Name (Floor: @device.Floor)
                                     </td>
                                     <td>
                                         @(device.UpdatedAt.HasValue ? device.UpdatedAt.Value.ToString("g") : "N/A")
+                                    </td>
+                                    <td>
+                                        @(device.UpdatedBy)
                                     </td>
                                 </tr>
                             }
@@ -189,6 +192,19 @@
     </main>
 </div>
 
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var rows = document.querySelectorAll(".clickable-row");
+            rows.forEach(function(row) {
+                row.addEventListener("click", function() {
+                    window.location = row.dataset.href;
+                });
+            });
+        });
+    </script>
+}
+
 <style>
     .status-dot {
         display: inline-block;
@@ -206,4 +222,5 @@
     .input-group { height: 38px; }
     .form-control { height: 100%; }
     .btn-primary { height: 100%; }
+    .clickable-row { cursor: pointer; }
 </style>

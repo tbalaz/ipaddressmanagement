@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ipaddressmanagement.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class OrganizationalUnit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,6 +43,7 @@ namespace ipaddressmanagement.Migrations
                     HighestFloor = table.Column<int>(type: "INTEGER", nullable: false),
                     NumberOfRooms = table.Column<int>(type: "INTEGER", nullable: false),
                     ShortName = table.Column<string>(type: "TEXT", maxLength: 2, nullable: false),
+                    OrganizationalUnit = table.Column<string>(type: "TEXT", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     CreatedBy = table.Column<string>(type: "TEXT", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
@@ -128,8 +129,8 @@ namespace ipaddressmanagement.Migrations
 
             migrationBuilder.InsertData(
                 table: "Buildings",
-                columns: new[] { "Id", "CityName", "CreatedAt", "CreatedBy", "HighestFloor", "LowestFloor", "Name", "NumberOfRooms", "ShortName", "StreetName", "StreetNumber", "UpdatedAt", "UpdatedBy" },
-                values: new object[] { 1, "Brussels", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SeedData", 20, 5, "Eurostation", 50, "ES", "Rue de la Loi", "12A", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SeedData" });
+                columns: new[] { "Id", "CityName", "CreatedAt", "CreatedBy", "HighestFloor", "LowestFloor", "Name", "NumberOfRooms", "OrganizationalUnit", "ShortName", "StreetName", "StreetNumber", "UpdatedAt", "UpdatedBy" },
+                values: new object[] { 1, "Brussels", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SeedData", 20, 5, "Eurostation", 50, "HQ", "ES", "Rue de la Loi", "12A", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SeedData" });
 
             migrationBuilder.InsertData(
                 table: "Users",
