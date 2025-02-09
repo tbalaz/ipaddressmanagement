@@ -6,15 +6,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--meta http-equiv="Content-Security-Policy" content="script-src * 'unsafe-inline' 'unsafe-eval';"-->
-    <!--meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval';"-->
     <title>@ViewData["Title"] - IPAddressManagement</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <style>
         body {
-            background-image: url('/images/home-background.webp'), linear-gradient(to bottom, #f8f9fa, #e9ecef);
+            background-image: url('/images/4.jpeg'), linear-gradient(to bottom, #f8f9fa, #e9ecef);
             background-size: cover;
             background-position: center;
             min-height: 100vh;
@@ -81,7 +79,6 @@
             border-radius: 15px;
         }
         .card-body {
-            <!--background-color: rgba(255, 255, 255, 0.9);:-->
             backdrop-filter: blur(2px);
             border-radius: 15px;
         }
@@ -98,13 +95,8 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Index">
-                                <i class="fas fa-home"></i> Home
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Networks" asp-action="Index">
-                                <i class="fas fa-network-wired"></i> Networks
+                            <a class="nav-link" asp-controller="Dashboard" asp-action="Index">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
@@ -120,6 +112,21 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Locations" asp-action="Index">
                                 <i class="fas fa-map-marker-alt"></i> Locations
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Networks" asp-action="Index">
+                                <i class="fas fa-network-wired"></i> Networks
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Users" asp-action="Index">
+                                <i class="fas fa-user-plus"></i> Users
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Permissions" asp-action="Index">
+                                <i class="fas fa-shield-alt"></i> Permissions
                             </a>
                         </li>
                     </ul>
@@ -144,19 +151,6 @@
     </header>
 
     <div class="container">
-        <!--nav aria-label="breadcrumb" class="mb-4">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i> Home</a></li>
-                @if (ViewData["Navigation"] is List<BreadcrumbItem> breadcrumbs)
-                {
-                    foreach (var crumb in breadcrumbs)
-                    {
-                        <li class="breadcrumb-item"><a href="@crumb.Url">@crumb.Title</a></li>
-                    }
-                }
-                <li class="breadcrumb-item active">@ViewData["Title"]</li>
-            </ol>
-        </nav-->
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -197,6 +191,6 @@
             }
         });
     });
-</script>
+    </script>
 </body>
 </html>

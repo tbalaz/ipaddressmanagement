@@ -1,0 +1,42 @@
+@model IPAddressManagement.Models.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_Layout";
+}
+
+<div class="content-container">
+    <main role="main">
+        <h1 class="display-4 mb-4">Dashboard</h1>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-header">Buildings</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.BuildingsCount</h5>
+                        <p class="card-text">Total number of buildings.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">Devices</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.DevicesCount</h5>
+                        <p class="card-text">Total number of devices.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-header">Locations</div>
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.LocationsCount</h5>
+                        <p class="card-text">Total number of locations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

@@ -156,6 +156,16 @@ public class BuildingsController : Controller
         {
             try
             {
+                var existingBuilding = await _context.Buildings.AsNoTracking().FirstOrDefaultAsync(b => b.Id == id);
+                if (existingBuilding == null)
+                {
+                    return NotFound();
+                }
+
+                building.CreatedBy = existingBuilding.CreatedBy;
+                building.CreatedAt = existingBuilding.CreatedAt;
+                building.UpdatedAt = DateTime.Now;
+                building.UpdatedBy = User.Identity?.Name;
                 _context.Update(building);
                 await _context.SaveChangesAsync();
             }
@@ -170,7 +180,7 @@ public class BuildingsController : Controller
                     throw;
                 }
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Edit));
         }
         return View(building);
     }

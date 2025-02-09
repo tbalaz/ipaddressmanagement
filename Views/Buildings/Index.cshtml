@@ -53,12 +53,13 @@
                                 <th>Rooms</th>
                                 <th>Short Name</th>
                                 <th>Last Updated</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var building in Model)
                             {
-                                <tr class="clickable-row" data-href="@Url.Action("Edit", new { id = building.Id })">
+                                <tr onclick="location.href='@Url.Action("Index", "Devices", new { buildingId = building.Id })'">
                                     <td>@building.CityName</td>
                                     <td>@building.Name</td>
                                     <td>@building.FullAddress</td>
@@ -66,6 +67,9 @@
                                     <td>@building.NumberOfRooms</td>
                                     <td>@building.ShortName</td>
                                     <td>@building.UpdatedAt</td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@building.Id" class="btn btn-sm btn-primary">Edit</a>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
@@ -90,20 +94,3 @@
         }
     </main>
 </div>
-
-@section Scripts {
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var rows = document.querySelectorAll(".clickable-row");
-            rows.forEach(function(row) {
-                row.addEventListener("click", function() {
-                    window.location = row.dataset.href;
-                });
-            });
-        });
-    </script>
-}
-
-<style>
-    .clickable-row { cursor: pointer; }
-</style>

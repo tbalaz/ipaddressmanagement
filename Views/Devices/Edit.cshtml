@@ -10,6 +10,9 @@
         <h1 class="display-4 mb-4">Edit Device</h1>
 
         <form asp-action="Edit" method="post" class="needs-validation" novalidate>
+            <input type="hidden" asp-for="DeviceID" />
+            <input type="hidden" asp-for="CreatedBy" />
+            <input type="hidden" asp-for="CreatedAt" />
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label asp-for="Hostname" class="form-label"></label>

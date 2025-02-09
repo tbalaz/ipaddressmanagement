@@ -3,133 +3,94 @@
     ViewData["Title"] = "Home";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            background-color: #f0f0f0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-image: url('/images/home-background.webp'), linear-gradient(to bottom, #f8f9fa, #e9ecef);
-            background-size: cover;
-            background-position: center;
-        }
+<style>
+    .nav-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 200px; /* Set a fixed width */
+        height: 150px; /* Set a fixed height */
+        padding: 1rem;
+        margin: 1rem;
+        border: 2px solid #007bff; /* Blue border */
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        color: #007bff;
+        transition: all 0.3s ease;
+    }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            padding: 1rem;
-        }
+    .nav-card:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+        transform: translateY(-2px);
+    }
 
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-            width: 100%;
-        }
+    .nav-card i {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
 
-        .nav-card {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 200px;
-            padding: 1rem;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+    .nav-card h3 {
+        margin: 0;
+    }
 
-        .nav-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+</style>
 
-        .nav-card i {
-            font-size: 2rem;
-            color: #007bff;
-            margin-bottom: 0.5rem;
-        }
-
-        .nav-card h3 {
-            font-size: 1.25rem;
-            color: #333;
-            margin: 0;
-        }
-
-        .welcome-message {
-            background-color: #ffcc99;
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="welcome-message">
-            <h3>Welcome, @User.Identity.Name</h3>
-        </div>
-        
-        <div class="row">
-            <!-- Networks -->
-            <a href="/Networks" class="nav-card">
-                <i class="fas fa-network-wired"></i>
-                <h3>Networks</h3>
-            </a>
-
-            <!-- Devices -->
-            <a href="/Devices" class="nav-card">
-                <i class="fas fa-laptop"></i>
-                <h3>Devices</h3>
-            </a>
-
-            <!-- Buildings -->
-            <a href="/Buildings" class="nav-card">
-                <i class="fas fa-building"></i>
-                <h3>Buildings</h3>
-            </a>
-
-            <!-- Locations -->
-            <a href="/Locations" class="nav-card">
-                <i class="fas fa-map-marker-alt"></i>
-                <h3>Locations</h3>
-            </a>
-
-            <!-- Add Device -->
-            <a href="/AddDevice" class="nav-card">
-                <i class="fas fa-plus-circle"></i>
-                <h3>Add Device</h3>
-            </a>
-
-            <!-- Add User -->
-            <a href="/AddUser" class="nav-card">
-                <i class="fas fa-user-plus"></i>
-                <h3>Add User</h3>
-            </a>
-
-            <!-- Set Permissions -->
-            <a href="/Permissions" class="nav-card">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Set Permissions</h3>
-            </a>
-        </div>
+<div class="content-container">
+    <div class="welcome-message">
+        <h3>Welcome, @User.Identity.Name</h3>
     </div>
-</body>
-</html>
+    <div class="row">
+        <!-- Dashboard -->
+        <a href="/Dashboard" class="nav-card">
+            <i class="fas fa-tachometer-alt"></i>
+            <h3>Dashboard</h3>
+        </a>
+
+        <!-- Devices -->
+        <a href="/Devices" class="nav-card">
+            <i class="fas fa-laptop"></i>
+            <h3>Devices</h3>
+        </a>
+
+        <!-- Buildings -->
+        <a href="/Buildings" class="nav-card">
+            <i class="fas fa-building"></i>
+            <h3>Buildings</h3>
+        </a>
+
+        <!-- Locations -->
+        <a href="/Locations" class="nav-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>Locations</h3>
+        </a>
+
+        <!-- Networks -->
+        <a href="/Networks" class="nav-card">
+            <i class="fas fa-network-wired"></i>
+            <h3>Networks</h3>
+        </a>
+
+        <!-- Users -->
+        <a href="/AddUser" class="nav-card">
+            <i class="fas fa-user-plus"></i>
+            <h3>Users</h3>
+        </a>
+
+        <!-- Permissions -->
+        <a href="/Permissions" class="nav-card">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Permissions</h3>
+        </a>
+        <a href="/Permissions" class="nav-card">
+            <i class="fa-solid fa-gear"></i>
+            <h3>Settings</h3>
+        </a>
+    </div>
+</div>
