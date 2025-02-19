@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using IPAddressManagement.Data; // Add this line
-using IPAddressManagement.Models; // Add this line
+using IPAddressManagement.Data;
+using IPAddressManagement.Models;
 
 namespace IPAddressManagement.Controllers
 {
@@ -78,14 +78,12 @@ namespace IPAddressManagement.Controllers
         public IActionResult ForgotPassword()
         {
             var forgotPasswordMessage = _configuration["AppSettings:ForgotPasswordMessage"];
-            return Json(new { message = forgotPasswordMessage});
-            //return View("Index");
+            return Json(new { message = forgotPasswordMessage });
         }
 
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync("CookieAuth");
-            //HttpContext.Session.Clear();
             return RedirectToAction("Index", "Login");
         }
 
@@ -102,6 +100,6 @@ namespace IPAddressManagement.Controllers
             }
 
             return true;
-        }        
+        }
     }
 }

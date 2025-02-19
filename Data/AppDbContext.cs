@@ -55,6 +55,20 @@ namespace IPAddressManagement.Data
                 .HasIndex(b => new { b.Name, b.StreetName, b.StreetNumber })
                 .IsUnique();
 
+            // Configure User entity
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(u => u.Id);
+                entity.Property(u => u.Username).IsRequired().HasMaxLength(50);
+                entity.Property(u => u.PasswordHash).IsRequired().HasMaxLength(100);
+                entity.Property(u => u.FirstName).IsRequired().HasMaxLength(50);
+                entity.Property(u => u.LastName).IsRequired().HasMaxLength(50);
+                entity.Property(u => u.Email).IsRequired().HasMaxLength(100);
+                entity.Property(u => u.PhoneNumber).HasMaxLength(20);
+                entity.Property(u => u.Company).HasMaxLength(100);
+                entity.Property(u => u.Role).IsRequired().HasMaxLength(50);
+            });
+
             // ----------------- SEED DATA -----------------
 
             // 1) Seed a user
@@ -64,6 +78,13 @@ namespace IPAddressManagement.Data
                     Id = 1,
                     Username = "admin",
                     PasswordHash = "$2a$11$p7WzGeSVIdVRSSpwvxxw7OC3C3K9j2WYCx1DAA0JIJAwnLn4aDwSe",
+                    FirstName = "Admin",
+                    LastName = "User",
+                    Email = "admin@example.com",
+                    PhoneNumber = "123-456-7890",
+                    Department = "IT",
+                    Company = "Example Corp",
+                    Role = "Administrator",
                     CreatedAt = new DateTime(2023, 1, 1),
                     UpdatedAt = new DateTime(2023, 1, 1),
                     CreatedBy = "SeedData",

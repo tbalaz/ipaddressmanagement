@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ipaddressmanagement")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b133ac788cc2a929ff858b64ee3f5415d308adec")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d071854e77e69e6ba0967a643f01498453cbab81")]
 [assembly: System.Reflection.AssemblyProductAttribute("ipaddressmanagement")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ipaddressmanagement")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
